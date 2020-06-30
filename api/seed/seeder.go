@@ -3,8 +3,8 @@ package seed
 import (
 	"log"
 
-	"github.com/jinzhu/gorm"
 	"github.com/grass-man/rundown/api/models"
+	"github.com/jinzhu/gorm"
 )
 
 var users = []models.User{
@@ -31,6 +31,7 @@ var posts = []models.Post{
 	},
 }
 
+// Load database configuration...
 func Load(db *gorm.DB) {
 
 	err := db.Debug().DropTableIfExists(&models.Post{}, &models.User{}).Error
@@ -49,7 +50,7 @@ func Load(db *gorm.DB) {
 		}
 	*/
 
-	for i, _ := range users {
+	for i := range users {
 		err = db.Debug().Model(&models.User{}).Create(&users[i]).Error
 		if err != nil {
 			log.Fatalf("cannot seed users table: %v", err)

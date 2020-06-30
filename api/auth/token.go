@@ -13,6 +13,7 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
+// CreateToken map jwt claims, set expiry and hash with api secret...
 func CreateToken(user_id uint32) (string, error) {
 	claims := jwt.MapClaims{}
 	claims["authorized"] = true
@@ -23,6 +24,7 @@ func CreateToken(user_id uint32) (string, error) {
 
 }
 
+// TokenValid validates received token...
 func TokenValid(r *http.Request) error {
 	tokenString := ExtractToken(r)
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -40,6 +42,7 @@ func TokenValid(r *http.Request) error {
 	return nil
 }
 
+// ExtractToken from request header and return token if exists
 func ExtractToken(r *http.Request) string {
 	keys := r.URL.Query()
 	token := keys.Get("token")
@@ -53,6 +56,7 @@ func ExtractToken(r *http.Request) string {
 	return ""
 }
 
+// ExtractTokenID from request header
 func ExtractTokenID(r *http.Request) (uint32, error) {
 
 	tokenString := ExtractToken(r)
@@ -76,7 +80,7 @@ func ExtractTokenID(r *http.Request) (uint32, error) {
 	return 0, nil
 }
 
-//Pretty display the claims licely in the terminal
+// Pretty display the claims licely in the terminal...
 func Pretty(data interface{}) {
 	b, err := json.MarshalIndent(data, "", " ")
 	if err != nil {

@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// FormatError custom error messages per key bases...
 func FormatError(err string) error {
 
 	if strings.Contains(err, "nickname") {

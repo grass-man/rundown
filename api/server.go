@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/grass-man/rundown/api/controllers"
 	"github.com/grass-man/rundown/api/seed"
+	"github.com/joho/godotenv"
 )
 
 var server = controllers.Server{}
@@ -19,6 +19,7 @@ func init() {
 	}
 }
 
+// Run initialize environment variables, load database configuration and start up web server
 func Run() {
 
 	var err error
